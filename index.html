@@ -155,30 +155,54 @@
 }
 
     .status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-      border: 1px solid transparent;
-    }
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
 
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: currentColor;
       flex: 0 0 auto;
     }
 
-    .chip-blue { background: var(--blue-soft); color: var(--blue); }
-    .chip-green { background: var(--green-soft); color: var(--green); }
-    .chip-orange { background: var(--orange-soft); color: var(--orange); }
-    .chip-red { background: var(--red-soft); color: var(--red); }
-    .chip-gray { background: var(--gray-soft); color: var(--gray); }
+.chip-blue {
+  background: #eaf2ff;
+  color: #4f8df7;
+  border-color: #d6e6ff;
+}
+
+.chip-green {
+  background: #eaf9ef;
+  color: #22c55e;
+  border-color: #d9f3e2;
+}
+
+.chip-orange {
+  background: #fff4e5;
+  color: #f59e0b;
+  border-color: #ffe2b8;
+}
+
+.chip-red {
+  background: #ffecec;
+  color: #ef4444;
+  border-color: #ffd4d4;
+}
+
+.chip-gray {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+}
 
     .meta-grid {
       display: grid;
@@ -334,9 +358,9 @@
     .item-right {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       align-items: flex-end;
-      min-width: 170px;
+      min-width: 190px;
     }
     
     .mini-icon{
@@ -826,15 +850,6 @@
               </div>
               <div class="item-right">
                 <span class="status-chip ${statusToChip[item.status] || 'chip-gray'}"><span class="dot"></span>${item.status}</span>
-                <div class="progress-box">
-                  <div class="progress-top">
-                    <span>Прогрес</span>
-                    <strong>${item.progress}%</strong>
-                  </div>
-                  <div class="progress-track">
-                    <div class="progress-bar" style="width:${item.progress}%"></div>
-                  </div>
-                </div>
               </div>
             </div>
            <div class="flow-row">
