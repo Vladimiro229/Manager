@@ -327,15 +327,16 @@
     }
 
     .flow-row {
-      margin-top: 14px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      background: #fbfdff;
-      border: 1px solid var(--line);
-      padding: 10px 12px;
-      border-radius: 14px;
-    }
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+  background: #fbfdff;
+  border: 1px solid var(--line);
+  padding: 12px 16px;
+  border-radius: 14px;
+}
 
     .flow-label {
       font-size: 12px;
@@ -348,16 +349,13 @@
     display:flex;
     align-items:center;
     gap:6px;
+    min-width:0;
     }
 
     .flow-value {
       font-size: 15px;
       font-weight: 600;
-    }
-    
-    .current-task{
-    color:#2563eb;
-    font-weight:700;
+      line-height:1.2;
     }
 
     .right-panel {
