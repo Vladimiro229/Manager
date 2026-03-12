@@ -569,9 +569,12 @@
             <div class="meta-value" id="summaryClient">Марина Awarder</div>
           </div>
           <div class="meta-card">
-            <div class="meta-label">Клієнт</div>
-            <div class="meta-value" id="summaryClient">Марина Awarder</div>
+            <div class="meta-label">SKU</div>
+            <div class="meta-value" id="summarySku">AW-5323</div>
           </div>
+          <div class="meta-card">
+            <div class="meta-label">Workflow</div>
+            <div class="meta-value" id="summaryWorkflow">2103</div>
           </div>
         </div>
 
@@ -607,6 +610,7 @@
             currentTask: 'Збірка циферблата',
             nextTask: 'Контроль якості циферблата',
             status: 'У роботі',
+            progress: 58,
             lastStatusChange: '21.02.2026 14:02',
             steps: [
               { name: 'Створення макету', status: 'Виконано', time: '21.02.2026 09:30', note: '—' },
@@ -629,6 +633,7 @@
             currentTask: 'Збірка циферблата',
             nextTask: 'Контроль якості циферблата',
             status: 'На паузі',
+            progress: 42,
             lastStatusChange: '21.02.2026 13:18',
             steps: [
               { name: 'Створення макету', status: 'Виконано', time: '21.02.2026 09:10', note: '—' },
@@ -649,6 +654,7 @@
             currentTask: 'Контроль якості циферблата',
             nextTask: 'Збірка годинника',
             status: 'Переробити',
+            progress: 67,
             lastStatusChange: '21.02.2026 14:40',
             steps: [
               { name: 'Створення макету', status: 'Виконано', time: '21.02.2026 08:55', note: '—' },
@@ -698,6 +704,8 @@
       document.getElementById('summaryDeadline').textContent = order.deadline;
       document.getElementById('summaryCreated').textContent = order.createdAt;
       document.getElementById('summaryClient').textContent = order.client;
+      document.getElementById('summarySku').textContent = order.sku;
+      document.getElementById('summaryWorkflow').textContent = order.workflow;
     }
 
     function renderItems(order) {
@@ -710,11 +718,22 @@
               <div>
                 <div class="item-title">${item.name}</div>
                 <div class="item-subtitle">${item.config}</div>
-                <div class="item-meta">                  <span>Остання зміна: ${item.lastStatusChange}</span>
+                <div class="item-meta">
+                  <span>SKU: ${item.sku}</span>
+                  <span>Арт.: ${item.article}</span>
+                  <span>Остання зміна: ${item.lastStatusChange}</span>
                 </div>
               </div>
-            </div>
-          </div>
+              <div class="item-right">
+                <span class="status-chip ${statusToChip[item.status] || 'chip-gray'}"><span class="dot"></span>${item.status}</span>
+                <div class="progress-box">
+                  <div class="progress-top">
+                    <span>Прогрес</span>
+                    <strong>${item.progress}%</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div class="progress-bar" style="width:${item.progress}%"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -756,7 +775,10 @@
           <div>
             <div class="detail-title">${item.name}</div>
             <div class="detail-submeta">
-              <span><strong>Остання зміна:</strong> ${item.lastStatusChange}</span>            </div>
+              <span><strong>Остання зміна:</strong> ${item.lastStatusChange}</span>
+              <span><strong>SKU:</strong> ${item.sku}</span>
+              <span><strong>Workflow:</strong> ${currentOrder.workflow}</span>
+            </div>
           </div>
           <button class="close-btn" id="closeDetail">×</button>
         </div>
@@ -769,6 +791,16 @@
           <div>
             <div class="flow-label">Next</div>
             <div class="flow-value">${item.nextTask}</div>
+          </div>
+        </div>
+
+        <div class="detail-progress">
+          <div class="progress-top">
+            <span>Progress</span>
+            <strong>${item.progress}%</strong>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" style="width:${item.progress}%"></div>
           </div>
         </div>
 
@@ -832,4 +864,3 @@
   </script>
 </body>
 </html>
-
