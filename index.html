@@ -1,1 +1,835 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Awarder — Manager Page Prototype</title>
+  <style>
+    :root {
+      --bg: #eef4ff;
+      --panel: #ffffff;
+      --panel-2: #f8fbff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --line: #dbe5f1;
+      --blue: #4f8df7;
+      --blue-soft: #eaf2ff;
+      --green: #22c55e;
+      --green-soft: #e9f9ef;
+      --orange: #f59e0b;
+      --orange-soft: #fff5e6;
+      --red: #ef4444;
+      --red-soft: #ffecec;
+      --gray: #94a3b8;
+      --gray-soft: #f1f5f9;
+      --shadow: 0 12px 30px rgba(31, 41, 55, 0.08);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .search-wrap {
+      background: var(--panel);
+      border: 3px solid #0f172a;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      min-height: 68px;
+      box-shadow: var(--shadow);
+    }
+
+    .search-wrap input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      background: transparent;
+    }
+
+    .search-wrap input::placeholder {
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .search-btn {
+      border: none;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #6aa8ff, #4f8df7);
+      color: #fff;
+      font-size: 28px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .left-panel {
+      padding: 18px;
+    }
+
+    .summary-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .summary-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .qty-pill {
+      background: var(--gray-soft);
+      border: 2px solid #cfe0ff;
+      color: #48607f;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 26px;
+      font-weight: 800;
+      min-width: 76px;
+      text-align: center;
+    }
+
+    .order-number {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 800;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: currentColor;
+      flex: 0 0 auto;
+    }
+
+    .chip-blue { background: var(--blue-soft); color: var(--blue); }
+    .chip-green { background: var(--green-soft); color: var(--green); }
+    .chip-orange { background: var(--orange-soft); color: var(--orange); }
+    .chip-red { background: var(--red-soft); color: var(--red); }
+    .chip-gray { background: var(--gray-soft); color: var(--gray); }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .meta-card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+    }
+
+    .meta-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    .meta-value {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    .items {
+      display: grid;
+      gap: 12px;
+    }
+
+    .item-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .item-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+      border-color: #c7d7f5;
+    }
+
+    .item-card.active {
+      border-color: #7aa6ff;
+      box-shadow: 0 10px 24px rgba(79, 141, 247, 0.12);
+    }
+
+    .item-top {
+      display: grid;
+      grid-template-columns: 72px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .item-image {
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #f1f5f9;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .item-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .item-subtitle {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .item-meta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: #475569;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .item-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      min-width: 170px;
+    }
+
+    .progress-box {
+      width: 170px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #e8eef8;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7db1ff, #4f8df7);
+    }
+
+    .flow-row {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      background: #fbfdff;
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      border-radius: 14px;
+    }
+
+    .flow-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+
+    .flow-value {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .right-panel {
+      padding: 18px;
+      position: sticky;
+      top: 18px;
+    }
+
+    .detail-empty {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(180deg, #fbfdff, #f4f8ff);
+      border-radius: 18px;
+      border: 1px dashed #c8d7ee;
+    }
+
+    .detail-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .detail-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .detail-submeta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .close-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 12px;
+      background: #f1f5f9;
+      font-size: 22px;
+      font-weight: 900;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .detail-current {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfdff;
+    }
+
+    .detail-progress {
+      margin-bottom: 14px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .workflow-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .step-left {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .step-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .step-note {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .step-right {
+      text-align: right;
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+    }
+
+    .step-time {
+      color: #475569;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .indicator-done { background: var(--green); }
+    .indicator-current { background: var(--blue); }
+    .indicator-paused { background: var(--orange); }
+    .indicator-blocked { background: var(--red); }
+    .indicator-cancelled { background: var(--gray); }
+    .indicator-next { background: #cbd5e1; }
+    .indicator-rework { background: #fb923c; }
+
+    @media (max-width: 1180px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .right-panel {
+        position: static;
+      }
+
+      .meta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .search-btn {
+        min-height: 58px;
+        font-size: 24px;
+      }
+
+      .search-wrap input {
+        font-size: 20px;
+      }
+
+      .order-number {
+        font-size: 28px;
+      }
+
+      .meta-grid,
+      .detail-current,
+      .flow-row,
+      .item-top {
+        grid-template-columns: 1fr;
+      }
+
+      .item-right {
+        align-items: flex-start;
+      }
+
+      .progress-box {
+        width: 100%;
+      }
+
+      .step-card {
+        grid-template-columns: 1fr;
+      }
+
+      .step-right {
+        justify-items: start;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <label class="search-wrap">
+        <input id="searchInput" type="text" placeholder="🔎 Напр.: 4349" value="4349" />
+      </label>
+      <button class="search-btn" id="searchBtn">Знайти</button>
+    </div>
+
+    <div class="layout">
+      <section class="panel left-panel">
+        <div class="summary-head">
+          <div class="summary-title">
+            <div class="qty-pill" id="summaryQty">3/3</div>
+            <div class="order-number" id="summaryOrder">O-AW-4349</div>
+            <span class="status-chip chip-blue"><span class="dot"></span>У роботі</span>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-card">
+            <div class="meta-label">Дедлайн</div>
+            <div class="meta-value" id="summaryDeadline">19.03.2026</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-label">Створено</div>
+            <div class="meta-value" id="summaryCreated">11.03.2026</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-label">Клієнт</div>
+            <div class="meta-value" id="summaryClient">Марина Awarder</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-label">Клієнт</div>
+            <div class="meta-value" id="summaryClient">Марина Awarder</div>
+          </div>
+          </div>
+        </div>
+
+        <div class="items" id="itemsList"></div>
+      </section>
+
+      <aside class="panel right-panel" id="detailPanel">
+        <div class="detail-empty">Вибери продукт зі списку, щоб побачити деталі workflow.</div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const orders = [
+      {
+        searchKey: '4349',
+        orderNumber: 'O-AW-4349',
+        qtyDone: 3,
+        qtyTotal: 3,
+        deadline: '19.03.2026',
+        createdAt: '11.03.2026',
+        client: 'Марина Awarder',
+        sku: 'AW-5323',
+        workflow: '2103',
+        items: [
+          {
+            id: 'item-1',
+            name: 'Awarder 055 — індивідуальний дизайн',
+            config: 'Army Green-Silver',
+            sku: 'AW-5323',
+            article: '5323',
+            image: '',
+            currentTask: 'Збірка циферблата',
+            nextTask: 'Контроль якості циферблата',
+            status: 'У роботі',
+            lastStatusChange: '21.02.2026 14:02',
+            steps: [
+              { name: 'Створення макету', status: 'Виконано', time: '21.02.2026 09:30', note: '—' },
+              { name: 'Контроль макету', status: 'Виконано', time: '21.02.2026 10:05', note: '—' },
+              { name: 'Друк на плівці', status: 'Виконано', time: '21.02.2026 10:40', note: '—' },
+              { name: 'Вирізання циферблата', status: 'Виконано', time: '21.02.2026 11:50', note: '—' },
+              { name: 'Збірка циферблата', status: 'У роботі', time: '21.02.2026 12:15', note: 'Активна задача' },
+              { name: 'Контроль якості циферблата', status: 'Наступна', time: '', note: 'Очікує старту' },
+              { name: 'Збірка годинника', status: 'Наступна', time: '', note: 'Очікує старту' },
+              { name: 'Нанесення гравіювання', status: 'Наступна', time: '', note: 'Очікує старту' }
+            ]
+          },
+          {
+            id: 'item-2',
+            name: 'Awarder 041 Індивідуальний дизайн',
+            config: 'Army Green-Silver',
+            sku: 'AW-5323',
+            article: '5323',
+            image: '',
+            currentTask: 'Збірка циферблата',
+            nextTask: 'Контроль якості циферблата',
+            status: 'На паузі',
+            lastStatusChange: '21.02.2026 13:18',
+            steps: [
+              { name: 'Створення макету', status: 'Виконано', time: '21.02.2026 09:10', note: '—' },
+              { name: 'Контроль макету', status: 'Виконано', time: '21.02.2026 09:48', note: '—' },
+              { name: 'Друк на плівці', status: 'Виконано', time: '21.02.2026 10:21', note: '—' },
+              { name: 'Вирізання циферблата', status: 'На паузі', time: '21.02.2026 11:35', note: 'Очікує матеріал' },
+              { name: 'Збірка циферблата', status: 'Наступна', time: '', note: 'Очікує старту' },
+              { name: 'Контроль якості циферблата', status: 'Наступна', time: '', note: 'Очікує старту' }
+            ]
+          },
+          {
+            id: 'item-3',
+            name: 'Awarder 041 Індивідуальний дизайн',
+            config: 'Army Green-Silver',
+            sku: 'AW-5323',
+            article: '5323',
+            image: '',
+            currentTask: 'Контроль якості циферблата',
+            nextTask: 'Збірка годинника',
+            status: 'Переробити',
+            lastStatusChange: '21.02.2026 14:40',
+            steps: [
+              { name: 'Створення макету', status: 'Виконано', time: '21.02.2026 08:55', note: '—' },
+              { name: 'Контроль макету', status: 'Виконано', time: '21.02.2026 09:22', note: '—' },
+              { name: 'Друк на плівці', status: 'Виконано', time: '21.02.2026 09:58', note: '—' },
+              { name: 'Вирізання циферблата', status: 'Виконано', time: '21.02.2026 10:34', note: '—' },
+              { name: 'Збірка циферблата', status: 'Виконано', time: '21.02.2026 11:48', note: '—' },
+              { name: 'Контроль якості циферблата', status: 'Переробити', time: '21.02.2026 12:26', note: 'Повернуто на доопрацювання' },
+              { name: 'Збірка годинника', status: 'Наступна', time: '', note: 'Очікує старту' }
+            ]
+          }
+        ]
+      }
+    ];
+
+    const statusToChip = {
+      'У роботі': 'chip-blue',
+      'Виконано': 'chip-green',
+      'На паузі': 'chip-orange',
+      'Заблоковано': 'chip-red',
+      'Скасовано': 'chip-gray',
+      'Переробити': 'chip-orange',
+      'Наступна': 'chip-gray'
+    };
+
+    const stepIndicatorClass = {
+      'Виконано': 'indicator-done',
+      'У роботі': 'indicator-current',
+      'На паузі': 'indicator-paused',
+      'Заблоковано': 'indicator-blocked',
+      'Скасовано': 'indicator-cancelled',
+      'Наступна': 'indicator-next',
+      'Переробити': 'indicator-rework'
+    };
+
+    const listEl = document.getElementById('itemsList');
+    const detailEl = document.getElementById('detailPanel');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+
+    let currentOrder = orders[0];
+    let activeItemId = null;
+
+    function renderSummary(order) {
+      document.getElementById('summaryQty').textContent = `${order.qtyDone}/${order.qtyTotal}`;
+      document.getElementById('summaryOrder').textContent = order.orderNumber;
+      document.getElementById('summaryDeadline').textContent = order.deadline;
+      document.getElementById('summaryCreated').textContent = order.createdAt;
+      document.getElementById('summaryClient').textContent = order.client;
+    }
+
+    function renderItems(order) {
+      listEl.innerHTML = order.items.map(item => {
+        const isActive = item.id === activeItemId;
+        return `
+          <article class="item-card ${isActive ? 'active' : ''}" data-item-id="${item.id}">
+            <div class="item-top">
+              <div class="item-image">Фото</div>
+              <div>
+                <div class="item-title">${item.name}</div>
+                <div class="item-subtitle">${item.config}</div>
+                <div class="item-meta">                  <span>Остання зміна: ${item.lastStatusChange}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+                </div>
+              </div>
+            </div>
+            <div class="flow-row">
+              <div>
+                <div class="flow-label">Current</div>
+                <div class="flow-value">${item.currentTask}</div>
+              </div>
+              <div>
+                <div class="flow-label">Next</div>
+                <div class="flow-value">${item.nextTask}</div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      listEl.querySelectorAll('.item-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const id = card.dataset.itemId;
+          activeItemId = id;
+          renderItems(currentOrder);
+          const item = currentOrder.items.find(x => x.id === id);
+          renderDetail(item);
+        });
+      });
+    }
+
+    function renderDetail(item) {
+      if (!item) {
+        detailEl.innerHTML = `<div class="detail-empty">Вибери продукт зі списку, щоб побачити деталі workflow.</div>`;
+        return;
+      }
+
+      const legendStatuses = ['Виконано', 'У роботі', 'На паузі', 'Заблоковано', 'Скасовано', 'Переробити'];
+
+      detailEl.innerHTML = `
+        <div class="detail-head">
+          <div>
+            <div class="detail-title">${item.name}</div>
+            <div class="detail-submeta">
+              <span><strong>Остання зміна:</strong> ${item.lastStatusChange}</span>            </div>
+          </div>
+          <button class="close-btn" id="closeDetail">×</button>
+        </div>
+
+        <div class="detail-current">
+          <div>
+            <div class="flow-label">Current</div>
+            <div class="flow-value">${item.currentTask}</div>
+          </div>
+          <div>
+            <div class="flow-label">Next</div>
+            <div class="flow-value">${item.nextTask}</div>
+          </div>
+        </div>
+
+        <div class="legend">
+          ${legendStatuses.map(status => `
+            <span class="status-chip ${statusToChip[status] || 'chip-gray'}"><span class="dot"></span>${status}</span>
+          `).join('')}
+        </div>
+
+        <div class="workflow-list">
+          ${item.steps.map(step => `
+            <div class="step-card">
+              <div class="step-left">
+                <span class="step-indicator ${stepIndicatorClass[step.status] || 'indicator-next'}"></span>
+                <div>
+                  <div class="step-title">${step.name}</div>
+                  <div class="step-note">${step.note || '—'}</div>
+                </div>
+              </div>
+              <div class="step-right">
+                <span class="status-chip ${statusToChip[step.status] || 'chip-gray'}"><span class="dot"></span>${step.status}</span>
+                <div class="step-time">${step.time || '—'}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      document.getElementById('closeDetail').addEventListener('click', () => {
+        activeItemId = null;
+        renderItems(currentOrder);
+        renderDetail(null);
+      });
+    }
+
+    function searchOrder() {
+      const value = searchInput.value.trim();
+      const found = orders.find(order => order.searchKey.includes(value) || order.orderNumber.includes(value));
+      if (!found) {
+        activeItemId = null;
+        listEl.innerHTML = '';
+        detailEl.innerHTML = `<div class="detail-empty">По запиту <strong>${value}</strong> нічого не знайдено.</div>`;
+        return;
+      }
+      currentOrder = found;
+      activeItemId = currentOrder.items[0]?.id || null;
+      renderSummary(currentOrder);
+      renderItems(currentOrder);
+      renderDetail(currentOrder.items[0] || null);
+    }
+
+    searchBtn.addEventListener('click', searchOrder);
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') searchOrder();
+    });
+
+    renderSummary(currentOrder);
+    activeItemId = currentOrder.items[0].id;
+    renderItems(currentOrder);
+    renderDetail(currentOrder.items[0]);
+  </script>
+</body>
+</html>
 
