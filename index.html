@@ -354,6 +354,11 @@
       font-size: 15px;
       font-weight: 600;
     }
+    
+    .current-task{
+    color:#2563eb;
+    font-weight:700;
+    }
 
     .right-panel {
   padding: 18px;
@@ -769,16 +774,16 @@
                 </div>
               </div>
             </div>
-            <div class="flow-row">
-              <div>
-                <div class="flow-label">Current</div>
-                <div class="flow-value">${item.currentTask}</div>
-              </div>
-              <div>
-                <div class="flow-label">Next</div>
-                <div class="flow-value">${item.nextTask}</div>
-              </div>
-            </div>
+           <div class="flow-row">
+            <div class="flow-inline">
+            <span class="flow-label">Current:</span>
+            <span class="flow-value current-task">${item.currentTask}</span>
+          </div>
+            <div class="flow-inline">
+            <span class="flow-label">Next:</span>
+            <span class="flow-value">${item.nextTask}</span>
+         </div>
+        </div>
           </article>
         `;
       }).join('');
