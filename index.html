@@ -91,11 +91,11 @@
     }
 
     .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
-      gap: 18px;
-      align-items: start;
-    }
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
 
     .panel {
       background: var(--panel);
@@ -338,10 +338,18 @@
     }
 
     .right-panel {
-      padding: 18px;
-      position: sticky;
-      top: 18px;
-    }
+  padding: 18px;
+  position: sticky;
+  top: 18px;
+  display: none;
+}
+    .layout.open-detail {
+  grid-template-columns: 1.3fr 0.9fr;
+}
+
+.layout.open-detail .right-panel {
+  display: block;
+}
 
     .detail-empty {
       min-height: 420px;
@@ -752,13 +760,14 @@
       }).join('');
 
       listEl.querySelectorAll('.item-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const id = card.dataset.itemId;
-          activeItemId = id;
-          renderItems(currentOrder);
-          const item = currentOrder.items.find(x => x.id === id);
-          renderDetail(item);
-        });
+       card.addEventListener('click', () => {
+  const id = card.dataset.itemId;
+  activeItemId = id;
+  renderItems(currentOrder);
+  const item = currentOrder.items.find(x => x.id === id);
+  renderDetail(item);
+  document.querySelector('.layout').classList.add('open-detail');
+});
       });
     }
 
@@ -833,6 +842,7 @@
         activeItemId = null;
         renderItems(currentOrder);
         renderDetail(null);
+        document.querySelector('.layout').classList.remove('open-detail');
       });
     }
 
