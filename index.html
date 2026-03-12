@@ -284,11 +284,11 @@
 
     .item-meta {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
       color: #475569;
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .item-right {
@@ -636,8 +636,10 @@
         items: [
           {
             id: 'item-1',
-            name: 'Awarder 055 — індивідуальний дизайн',
+            name: 'Awarder 055 індивідуальний дизайн',
             config: 'Army Green-Silver',
+             productDeadline: '20.03.2026 22:00',
+            externalOrderNumber: 'O-AW-4379',
             sku: 'AW-5323',
             article: '5323',
             image: '',
@@ -661,6 +663,8 @@
             id: 'item-2',
             name: 'Awarder 041 Індивідуальний дизайн',
             config: 'Army Green-Silver',
+            productDeadline: '20.03.2026 22:00',
+            externalOrderNumber: 'O-AW-4379',
             sku: 'AW-5323',
             article: '5323',
             image: '',
@@ -682,6 +686,8 @@
             id: 'item-3',
             name: 'Awarder 041 Індивідуальний дизайн',
             config: 'Army Green-Silver',
+             productDeadline: '20.03.2026 22:00',
+            externalOrderNumber: 'O-AW-4379',
             sku: 'AW-5323',
             article: '5323',
             image: '',
@@ -753,11 +759,11 @@
                <div class="item-title">
   ${item.name}<span class="product-config"> (${item.config})</span>
 </div>
-                <div class="item-meta">
-                  <span>SKU: ${item.sku}</span>
-                  <span>Арт.: ${item.article}</span>
-                  <span>Остання зміна: ${item.lastStatusChange}</span>
-                </div>
+               <div class="item-meta">
+               <span>Дедлайн: ${item.productDeadline}</span>
+               <span>Замовлення: ${item.externalOrderNumber}</span>
+               <span>Остання зміна: ${item.lastStatusChange}</span>
+              </div>
               </div>
               <div class="item-right">
                 <span class="status-chip ${statusToChip[item.status] || 'chip-gray'}"><span class="dot"></span>${item.status}</span>
