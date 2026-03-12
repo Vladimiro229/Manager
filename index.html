@@ -211,6 +211,46 @@
       line-height: 1.3;
       word-break: break-word;
     }
+    
+    .meta-tooltip-wrap{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.meta-icon-text{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
+}
+
+.meta-tooltip{
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  min-width: 220px;
+  max-width: 280px;
+  background: #dcebfa;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+  padding: 10px 12px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: 0.18s ease;
+  z-index: 20;
+}
+
+.meta-tooltip-wrap:hover .meta-tooltip{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
     .items {
       display: grid;
@@ -297,6 +337,11 @@
       gap: 10px;
       align-items: flex-end;
       min-width: 170px;
+    }
+    
+    .mini-icon{
+    font-size: 13px;
+    opacity: 0.9;
     }
 
     .progress-box {
@@ -760,10 +805,24 @@
   ${item.name}<span class="product-config"> (${item.config})</span>
 </div>
                <div class="item-meta">
-               <span>Дедлайн: ${item.productDeadline}</span>
-               <span>Замовлення: ${item.externalOrderNumber}</span>
-               <span>Остання зміна: ${item.lastStatusChange}</span>
-              </div>
+                    <div class="meta-tooltip-wrap">
+                   <span class="meta-icon-text">
+                  <span class="mini-icon">📅</span>
+                  ${item.productDeadline}
+                  </span>
+                    <div class="meta-tooltip">Найближчий дедлайн виробництва в межах цього замовлення</div>
+                   </div>
+
+                   <div class="meta-tooltip-wrap">
+                   <span class="meta-icon-text">
+                   <span class="mini-icon">🧾</span>
+                   ${item.externalOrderNumber}
+                  </span>
+                  <div class="meta-tooltip">Номер зовнішнього замовлення</div>
+                  </div>
+
+  <span>Остання зміна: ${item.lastStatusChange}</span>
+</div>
               </div>
               <div class="item-right">
                 <span class="status-chip ${statusToChip[item.status] || 'chip-gray'}"><span class="dot"></span>${item.status}</span>
