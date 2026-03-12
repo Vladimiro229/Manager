@@ -50,6 +50,11 @@
       margin: 0 auto;
       padding: 18px;
     }
+    
+    .product-config{
+     color:#64748b;
+     font-weight:400;
+    }
 
     .topbar {
       display: grid;
@@ -333,15 +338,21 @@
     }
 
     .flow-label {
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 12px;
+      color: #64748b;
       margin-bottom: 4px;
-      font-weight: 800;
+      font-weight: 600;
+    }
+    
+    .flow-inline{
+    display:flex;
+    align-items:center;
+    gap:6px;
     }
 
     .flow-value {
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 600;
     }
 
     .right-panel {
@@ -417,6 +428,11 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       background: #fbfdff;
+    }
+    
+    .detail-current .flow-inline:first-child .flow-value{
+      color:#2563eb;
+      font-weight:700;
     }
 
     .detail-progress {
@@ -731,8 +747,9 @@
             <div class="item-top">
               <div class="item-image">Фото</div>
               <div>
-                <div class="item-title">${item.name}</div>
-                <div class="item-subtitle">${item.config}</div>
+               <div class="item-title">
+  ${item.name}<span class="product-config"> (${item.config})</span>
+</div>
                 <div class="item-meta">
                   <span>SKU: ${item.sku}</span>
                   <span>Арт.: ${item.article}</span>
@@ -799,16 +816,17 @@
           <button class="close-btn" id="closeDetail">×</button>
         </div>
 
-        <div class="detail-current">
-          <div>
-            <div class="flow-label">Current</div>
-            <div class="flow-value">${item.currentTask}</div>
-          </div>
-          <div>
-            <div class="flow-label">Next</div>
-            <div class="flow-value">${item.nextTask}</div>
-          </div>
-        </div>
+       <div class="detail-current">
+          <div class="flow-inline">
+           <span class="flow-label">Current:</span>
+           <span class="flow-value">${item.currentTask}</span>
+       </div>
+
+           <div class="flow-inline">
+           <span class="flow-label">Next:</span>
+           <span class="flow-value">${item.nextTask}</span>
+       </div>
+      </div>
 
         <div class="detail-progress">
           <div class="progress-top">
