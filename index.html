@@ -934,35 +934,8 @@
         <div class="detail-head">
           <div>
             <div class="detail-title">${item.name}</div>
-            <div class="detail-submeta">
-              <span><strong>Остання зміна:</strong> ${item.lastStatusChange}</span>
-              <span><strong>SKU:</strong> ${item.sku}</span>
-              <span><strong>Workflow:</strong> ${currentOrder.workflow}</span>
-            </div>
           </div>
           <button class="close-btn" id="closeDetail">×</button>
-        </div>
-
-       <div class="detail-current">
-        <div class="flow-inline">
-        <span class="flow-label">Поточний етап:</span>
-        <span class="flow-value">${item.currentTask}</span>
-    </div>
-
-     <div class="flow-inline">
-        <span class="flow-label">Наступний етап:</span>
-        <span class="flow-value">${item.nextTask}</span>
-    </div>
-    </div>
-
-        <div class="detail-progress">
-          <div class="progress-top">
-            <span>Progress</span>
-            <strong>${item.progress}%</strong>
-          </div>
-          <div class="progress-track">
-            <div class="progress-bar" style="width:${item.progress}%"></div>
-          </div>
         </div>
 
         <div class="legend">
