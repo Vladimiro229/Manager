@@ -65,28 +65,44 @@
 
     .search-wrap {
       background: var(--panel);
-      border: 3px solid #0f172a;
+      border: 1.5px solid #cbd5e1;
       border-radius: 999px;
       display: flex;
       align-items: center;
       padding: 0 16px;
-      min-height: 52px;
+      min-height: 56px;
       box-shadow: var(--shadow);
+      gap: 10px;
+    }
+
+    .search-icon {
+     font-size: 18px;
+     opacity: 0.6;
+    }
+    
+    .search-wrap:hover {
+      border-color: #94a3b8;
+    }
+    
+    .search-wrap:focus-within {
+     border-color: #3b82f6;
+     box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
     }
 
     .search-wrap input {
       width: 100%;
       border: none;
       outline: none;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 22px;
+      font-weight: 600;
+      color: #0f172a;
       background: transparent;
+      font-family: "Inter", system-ui, sans-serif;
     }
 
     .search-wrap input::placeholder {
       color: #94a3b8;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .search-btn {
@@ -644,8 +660,9 @@
   <div class="page">
     <div class="topbar">
       <label class="search-wrap">
-        <input id="searchInput" type="text" placeholder="🔎 Напр.: 4349" value="4349" />
-      </label>
+        <span class="search-icon">🔎</span>
+        <input id="searchInput" type="text" placeholder="Напр.: 4349" value="4349" />
+       </label>
       <button class="search-btn" id="searchBtn">Знайти</button>
     </div>
 
