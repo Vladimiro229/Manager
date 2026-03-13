@@ -582,58 +582,41 @@
       position: relative;
       grid-template-columns: 1fr auto;
       gap: 10px;
-      align-items: start;
+      align-items: center;
     }
-    
-    .step-card:first-child::before{
-     top: 18px;
-    }
-
-    .step-card:last-child::before{
-     bottom: 50%;
-    }
-
-    .step-card::before{
-     content:"";
-     position:absolute;
-     left: 15px;
-     top: -8px;
-     bottom: -8px;
-     width: 2px;
-     background: #dbe5f1;
-     z-index: 0;
-    }
-
+  
     .step-left {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: flex-start;
       position: relative;
       z-index: 1;
     }
 
     .step-indicator {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      margin-top: 7px;
+      margin-top: 6px;
       flex: 0 0 auto;
       position: relative;
       z-index: 1;
+      box-shadow: 0 0 0 4px #fff;
     }
 
     .step-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      line-height: 1.25;
-    }
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
 
-    .step-note {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-    }
+.step-note {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
 
     .step-right {
       text-align: right;
@@ -641,12 +624,20 @@
       gap: 10px;
       justify-items: end;
       align-items:center;
+      justify-content: flex-end;
+      min-width: 170px;
     }
 
     .step-time {
       color: #475569;
       font-size: 12px;
       font-weight: 700;
+      white-space: nowrap;
+    }
+    
+    .step-right .status-chip{
+      min-width: 110px;
+      justify-content: center;
     }
 
     .indicator-done { background: var(--green); }
