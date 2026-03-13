@@ -1015,12 +1015,12 @@
     
     document.addEventListener("keydown", function(e) {
   if (e.key === "Escape") {
-
     const layout = document.querySelector(".layout");
-    const detail = document.getElementById("detailPanel");
-
+    activeItemId = null;
     if (layout) layout.classList.remove("open-detail");
-    if (detail) detail.innerHTML = "";
+    renderItems(currentOrder);
+    renderDetail(null);
+
   }
 });
 </script>
