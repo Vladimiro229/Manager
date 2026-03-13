@@ -620,12 +620,14 @@
 
     .step-right {
       text-align: right;
-      display: flex;
+      display: grid;
       gap: 10px;
       justify-items: end;
       align-items:center;
-      justify-content: flex-end;
+      justify-content: end;
       min-width: 170px;
+      grid-template-columns: 120px 110px;
+      column-gap: 10px;
     }
 
     .step-time {
@@ -633,10 +635,11 @@
       font-size: 12px;
       font-weight: 700;
       white-space: nowrap;
+      text-align: right;
     }
     
     .step-right .status-chip{
-      min-width: 110px;
+      min-width: 120px;
       justify-content: center;
     }
 
