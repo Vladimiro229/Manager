@@ -983,10 +983,11 @@
         return;
       }
       currentOrder = found;
-      activeItemId = currentOrder.items[0]?.id || null;
+      activeItemId = null;
       renderSummary(currentOrder);
       renderItems(currentOrder);
-      renderDetail(currentOrder.items[0] || null);
+      renderDetail(null);
+      document.querySelector('.layout').classList.remove('open-detail');
     }
 
     searchBtn.addEventListener('click', searchOrder);
@@ -995,9 +996,9 @@
     });
 
     renderSummary(currentOrder);
-    activeItemId = currentOrder.items[0].id;
+    activeItemId = null;
     renderItems(currentOrder);
-    renderDetail(currentOrder.items[0]);
+    renderDetail(null);
   </script>
   <script>
     const searchInput = document.getElementById("searchInput");
