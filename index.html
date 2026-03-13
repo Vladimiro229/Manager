@@ -316,18 +316,21 @@
       padding: 10px 12px;
       background: #fff;
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      transition: all 0.18s ease;
     }
 
     .item-card:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
-      border-color: #c7d7f5;
+      background: #f8fbff;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+      border-color: #93c5fd;
     }
 
     .item-card.active {
-      border-color: #7aa6ff;
-      box-shadow: 0 10px 24px rgba(79, 141, 247, 0.12);
+      border: 2px solid #3b82f6;
+      border-radius: 16px;
+      background: #f5f9ff;
+      box-shadow: 0 8px 20px rgba(59,130,246,0.12);
     }
 
     .item-top {
