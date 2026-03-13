@@ -966,7 +966,7 @@
                 <span class="step-indicator ${stepIndicatorClass[step.status] || 'indicator-next'}"></span>
                 <div>
                   <div class="step-title">${step.name}</div>
-                  <div class="step-note">Виконано</div>
+                  <div class="step-note">${step.note || ''}</div>
                 </div>
               </div>
               <div class="step-right">
@@ -1012,10 +1012,6 @@
     activeItemId = null;
     renderItems(currentOrder);
     renderDetail(null);
-
-    
-    const searchInput = document.getElementById("searchInput");
-    const searchBtn = document.getElementById("searchBtn");
     
     document.addEventListener("keydown", function(e) {
   if (e.key === "Escape") {
