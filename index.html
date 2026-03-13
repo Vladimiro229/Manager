@@ -106,16 +106,27 @@
     }
 
     .search-btn {
-      border: none;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #6aa8ff, #4f8df7);
-      color: #fff;
+      border: 1.5px solid #3b82f6;
+      border-radius: 999px;
+      background: linear-gradient(135deg,#60a5fa,#3b82f6);
+      color: white;
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 700;
+      height: 56px;
       cursor: pointer;
       box-shadow: var(--shadow);
       min-height: 52px;
-      padding: 0 18px;
+      padding: 0 26px;
+      transition: all 0.2s ease;
+    }
+    
+    .search-btn:hover {
+     background: linear-gradient(135deg,#3b82f6,#2563eb);
+     box-shadow: 0 4px 14px rgba(59,130,246,0.25);
+    }
+
+    .search-btn:active {
+     transform: scale(0.98);
     }
 
     .layout {
@@ -123,7 +134,7 @@
   grid-template-columns: 1fr;
   gap: 18px;
   align-items: start;
-}
+   }
 
     .panel {
       background: var(--panel);
@@ -661,7 +672,7 @@
     <div class="topbar">
       <label class="search-wrap">
         <span class="search-icon">🔎</span>
-        <input id="searchInput" type="text" placeholder="Напр.: 4349" value="4349" />
+        <input id="searchInput" type="text" placeholder="Пошук" value="4349" />
        </label>
       <button class="search-btn" id="searchBtn">Знайти</button>
     </div>
@@ -988,5 +999,15 @@
     renderItems(currentOrder);
     renderDetail(currentOrder.items[0]);
   </script>
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+
+    searchInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+    searchBtn.click();
+  }
+});
+</script>
 </body>
 </html>
