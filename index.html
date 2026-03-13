@@ -459,11 +459,18 @@
 }
 
     .right-panel {
-  padding: 18px;
+  padding: 14px;
   position: sticky;
-  top: 18px;
+  top: 12px;
   display: none;
 }
+
+    .right-panel .status-chip {
+  padding: 5px 10px;
+  font-size: 12px;
+  gap: 6px;
+}
+    
     .layout.open-detail {
   grid-template-columns: 1.3fr 0.9fr;
 }
@@ -495,19 +502,20 @@
     }
 
     .detail-title {
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 10px;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 8px;
     }
 
     .detail-submeta {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       color: var(--muted);
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 1.3;
     }
 
     .close-btn {
@@ -526,10 +534,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 12px;
-      padding: 14px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 14px;
       background: #fbfdff;
     }
     
@@ -537,6 +545,17 @@
       color:#2563eb;
       font-weight:700;
     }
+    
+    .detail-current .flow-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+   }
+
+    .detail-current .flow-value {
+    font-size: 13px;
+    font-weight: 600;
+   }
 
     .detail-progress {
       margin-bottom: 14px;
@@ -544,9 +563,9 @@
 
     .legend {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .workflow-list {
@@ -556,12 +575,12 @@
 
     .step-card {
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
+      border-radius: 14px;
+      padding: 10px 12px;
       background: #fff;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 14px;
+      gap: 10px;
       align-items: start;
     }
 
@@ -580,15 +599,16 @@
     }
 
     .step-title {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.25;
     }
 
     .step-note {
       color: var(--muted);
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .step-right {
@@ -600,8 +620,8 @@
 
     .step-time {
       color: #475569;
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .indicator-done { background: var(--green); }
@@ -664,8 +684,10 @@
       }
 
       .step-right {
-        justify-items: start;
-        text-align: left;
+        justify-items: end;
+        text-align: right;
+        display: grid;
+        gap: 6px;
       }
     }
   </style>
