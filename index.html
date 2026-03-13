@@ -1012,14 +1012,19 @@
     activeItemId = null;
     renderItems(currentOrder);
     renderDetail(null);
-  </script>
-  <script>
+
+    
     const searchInput = document.getElementById("searchInput");
     const searchBtn = document.getElementById("searchBtn");
+    
+    document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
 
-    searchInput.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-    searchBtn.click();
+    const layout = document.querySelector(".layout");
+    const detail = document.getElementById("detailPanel");
+
+    if (layout) layout.classList.remove("open-detail");
+    if (detail) detail.innerHTML = "";
   }
 });
 </script>
