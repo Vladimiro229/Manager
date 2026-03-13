@@ -498,14 +498,14 @@
       align-items: start;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 4px;
     }
 
     .detail-title {
       font-size: 22px;
       font-weight: 700;
       line-height: 1.15;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .detail-submeta {
@@ -570,24 +570,46 @@
 
     .workflow-list {
       display: grid;
-      gap: 10px;
+      gap: 8px;
     }
 
     .step-card {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 8px 10px;
       background: #fff;
       display: grid;
+      position: relative;
       grid-template-columns: 1fr auto;
       gap: 10px;
       align-items: start;
+    }
+    
+    .step-card:first-child::before{
+     top: 18px;
+    }
+
+    .step-card:last-child::before{
+     bottom: 50%;
+    }
+
+    .step-card::before{
+     content:"";
+     position:absolute;
+     left: 15px;
+     top: -8px;
+     bottom: -8px;
+     width: 2px;
+     background: #dbe5f1;
+     z-index: 0;
     }
 
     .step-left {
       display: flex;
       gap: 12px;
       align-items: flex-start;
+      position: relative;
+      z-index: 1;
     }
 
     .step-indicator {
@@ -596,10 +618,12 @@
       border-radius: 50%;
       margin-top: 7px;
       flex: 0 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .step-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       margin-bottom: 4px;
       line-height: 1.25;
@@ -613,9 +637,10 @@
 
     .step-right {
       text-align: right;
-      display: grid;
-      gap: 8px;
+      display: flex;
+      gap: 10px;
       justify-items: end;
+      align-items:center;
     }
 
     .step-time {
@@ -681,13 +706,6 @@
 
       .step-card {
         grid-template-columns: 1fr;
-      }
-
-      .step-right {
-        justify-items: end;
-        text-align: right;
-        display: grid;
-        gap: 6px;
       }
     }
   </style>
@@ -951,7 +969,7 @@
                 <span class="step-indicator ${stepIndicatorClass[step.status] || 'indicator-next'}"></span>
                 <div>
                   <div class="step-title">${step.name}</div>
-                  <div class="step-note">${step.note || '—'}</div>
+                  <div class="step-note">Виконано</div>
                 </div>
               </div>
               <div class="step-right">
